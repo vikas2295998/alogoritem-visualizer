@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(56, 53, 53);
+}
+.clock{
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border: 2px solid red;
+    /* transform: rotate(-90deg); */
+}
+.clock::before{
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: 50%;
+    left: 50%;
+    background-color: red;
+    border-radius: 50%;
+}
+.clock div{
+
+
+color: red;
+text-align: center;
+font-weight: 600;
+font-size: 1rem;
+
+position: absolute;
+inset: 20px;
+
+/* transform-origin: left; */
+transform: rotate(calc(var(--i)*30deg));
+
+}
+.clock div span{
+   
+  display: inline-block;
+  transform: rotate(calc(var(--i)*-30deg))
+
+}
+
+
+.hour{
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    border: 2px solid yellow;
+    border-radius: 50%;
+    top: 0;
+    left: 0;
+}
+</style>
+<body>
+    <div class="clock">
+        <div class="hour"></div>
+        <div class="min"></div>
+        <div class="sc"></div>
+        <div style="--i:1;"><span>1</span></div>
+        <div style="--i:2;"><span>2</span></div>
+        <div style="--i:3;"><span>3</span></div>
+        <div style="--i:4;"><span>4</span></div>
+        <div style="--i:5;"><span>5</span></div>
+        <div style="--i:6;"><span>6</span></div>
+        <div style="--i:7;"><span>7</span></div>
+        <div style="--i:8;"><span>8</span></div>
+        <div style="--i:9;"><span>9</span></div>
+        <div style="--i:10;"><span>10</span></div>
+        <div style="--i:11;"><span>11</span></div>
+        <div style="--i:12;"><span>12</span></div>
+    
+    </div>
+</body>
+</html>
