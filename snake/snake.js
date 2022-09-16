@@ -1,4 +1,78 @@
- let grid=document.getElementById("gamearea");
+
+
+   const background= new Audio('background.mp3');
+   const eat_music= new Audio('eat_food.mp3');
+   const gameover_music= new Audio('gameover.mp3');
+
+
+  document.getElementById('clr1').style=`background-color:#CE5ABE;`;
+  document.getElementById('clr2').style=`background-color:#0A0832;`;
+  document.getElementById('clr3').style=`background-color:#1eae81;`;
+  document.getElementById('clr4').style=`background-color:#BA58DA;`;
+ const fun=(ele)=>{
+    background.play();
+    speed=count;
+    if(ele===2 && !(snake.length>1 && dir==='down')){
+        (snake.length>1 && dir==='down')
+        
+        snakedir.x=-1;
+        snakedir.y=0;
+        dir='up';
+    }
+    else if(ele===8 && !(snake.length>1 && dir==='up')){
+        snakedir.x=1;
+        snakedir.y=0;
+        dir='down';
+    }
+    else if(ele===4 && !(snake.length>1 && dir==='right')){
+        snakedir.x=0;
+         snakedir.y=-1;
+         dir='left';
+    }
+    else if(ele===6 && !(snake.length>1 && dir==='left')){
+        snakedir.x=0;
+        snakedir.y=1;
+        dir='right';
+    }
+    else if(ele===5 ){
+        speed=0;
+    }
+
+    else{
+        speed=count;
+    }
+}
+const changecolor=(ele)=>{
+    console.log("vikas");
+    let clr="pink";
+    document.getElementById('clr1').style=`background-color:#CE5ABE;`;
+    document.getElementById('clr2').style=`background-color:#0A0832;`;
+    document.getElementById('clr3').style=`background-color:#1eae81;`;
+    document.getElementById('clr4').style=`background-color:#BA58DA;`;
+        if(ele===1){
+            clr="#CE5ABE";
+            document.getElementById('clr1').style=`background-color:rgb(8, 180, 8);box-shadow:1px 1px 2px white,-1px -1px 2px white,-1px 1px 2px white,1px -1px 2px white,
+            2px 2px 3px white,-2px 2px 3px white,2px -2px 3px white,-2px -2px 3px white;`;
+        }
+        else if(ele===2){
+            clr="#0A0832";
+            document.getElementById('clr2').style=`background-color:rgb(8, 180, 8);box-shadow:1px 1px 2px white,-1px -1px 2px white,-1px 1px 2px white,1px -1px 2px white,
+            2px 2px 3px white,-2px 2px 3px white,2px -2px 3px white,-2px -2px 3px white;`;
+        }
+        else if(ele===3){
+                clr="#1eae81";
+                document.getElementById('clr3').style=`background-color:rgb(8, 180, 8);box-shadow:1px 1px 2px white,-1px -1px 2px white,-1px 1px 2px white,1px -1px 2px white,
+            2px 2px 3px white,-2px 2px 3px white,2px -2px 3px white,-2px -2px 3px white;`;
+        }
+        else{
+             clr="#BA58DA";
+             document.getElementById('clr4').style=`background-color:rgb(8, 180, 8);box-shadow:1px 1px 2px white,-1px -1px 2px white,-1px 1px 2px white,1px -1px 2px white,
+            2px 2px 3px white,-2px 2px 3px white,2px -2px 3px white,-2px -2px 3px white;`;
+        }
+        document.getElementById("BODY").style.background=`${clr}`;
+}
+
+let grid=document.getElementById("gamearea");
 
 //         var node = document.createElement("div");
 //         node.innerHTML="vikas";
@@ -7,15 +81,19 @@
 //          node.classList.add('sbody');
 //         grid.appendChild(node);
     
-
-
+// newchanges  
 var snake=[{x:10,y:12}];
 var food={x:14,y:6};
+    food.x=Math.round(2+16*Math.random());
+    food.y=Math.round(2+16*Math.random());
 var snakedir={x:0,y:0};
 var ptime=0;
-var speed=4;
+var count=4;
+var speed=count;
 var score=0;
+var dir;
 localStorage.setItem('highScore',0);
+
 function main(ctime){
     window.requestAnimationFrame(main);
  
@@ -25,19 +103,23 @@ function main(ctime){
     gameEngine();
 }
 function isColide(){
+    if(snake[0].x<=0|| snake[0].x>20|| snake[0].y<=0|| snake[0].y>20)
+    return true;
     for(let i=1;i<snake.length;i++){
-        if(snake[0].x==snake[i].x&&snake[0].y==snake[i].y)
+        if(snake[0].x==snake[i].x&&snake[0].y==snake[i].y ) 
         return true;
     }
     return false;
 }
 function gamover(){
+    speed=0;
     document.getElementById('gameover').style.display='block';
     setTimeout(() => {
         document.getElementById('gameover').style.display='none';
     }, 1500);
     
 }
+
 function gameEngine(){
     grid.innerHTML="";
     document.getElementById('curr').innerHTML=`current score :${score}`;
@@ -46,14 +128,17 @@ function gameEngine(){
     document.getElementById('highest').innerHTML=`highest score :${hs}`;
     localStorage.setItem('highScore',hs);
     if(isColide()){
+        gameover_music.play();
         score=0;
         snake=[{x:10,y:12}];
         food={x:14,y:6};
         ptime=0;
-        alert("game over");
+        background.pause();
+        gamover();
         
     }
     if(snake[0].x==food.x&&snake[0].y==food.y){
+        eat_music.play();
         score++;
         x1=snakedir.x+food.x;
         y1=snakedir.y+food.y;
@@ -67,9 +152,9 @@ function gameEngine(){
         snake[i].x=snake[i-1].x;
         snake[i].y=snake[i-1].y;
     }
-    snake[0].x=(snake[0].x+snakedir.x)%20;
-    snake[0].y=(snake[0].y+snakedir.y)%20;
-
+    snake[0].x=(snake[0].x+snakedir.x);
+    snake[0].y=(snake[0].y+snakedir.y);
+  
     var node1 = document.createElement("div");
     node1.style.gridRowStart=food.x;
     node1.style.gridColumnStart=food.y;
@@ -91,27 +176,59 @@ function gameEngine(){
     });
 
 }
+// document.getElementById('top').addEventListener('onclick',()=>{ snakedir.x=-1;
+    // snakedir.y=0;})
+    // console.log(document.getElementsByClassName("bottun"));
+   
+    const startGame=()=>{
+        document.getElementsByClassName('welcome')[0].style.display="none";
+        document.getElementById('BODY').style.display="flex";
+        const name=document.getElementById('name').value;
+        if(name)
+        document.getElementById('yourname').innerText=name;
+        if(document.getElementById('easy').checked == true)  
+            count=4;   
+        else if(document.getElementById('mediam').checked == true)   
+                count=6;   
+        else if(document.getElementById('hard').checked == true)  
+                    count=8;    
 window.addEventListener('keydown',e=>{
+    background.play();
+    speed=count;
     switch (e.code) {
         case 'ArrowUp':
+            if( snake.length>1 && dir==='down')
+            break;
             snakedir.x=-1;
             snakedir.y=0;
+            dir='up';
             break;
         case 'ArrowDown':
+            if(snake.length>1 && dir==='up')
+            break;
              snakedir.x=1;
              snakedir.y=0;
+             dir='down';
             break;
             case 'ArrowLeft':
+                if(snake.length>1 && dir==='right')
+                break;
                 snakedir.x=0;
                  snakedir.y=-1;
+                 dir='left';
             break;
             case 'ArrowRight':
+                if(snake.length>1 && dir==='left')
+                break;
                 snakedir.x=0;
                  snakedir.y=1;
+                 dir='right';
             break;
     
         default:
             break;
     }
 });
+
 window.requestAnimationFrame(main);
+ }
