@@ -1,0 +1,54 @@
+  var fs = require('fs');
+        // console.log("vikas!!!!!!!!!!!!!!!11");
+        // function sendEmail() {
+        // Email.send({
+        //     // Host: "smtp.gmail.com",
+        //     // Username: "vikassaraymeer1999@gmail.com",
+        //     // Password: "EF8B2BFCE73B6DF6AB925C45C3E3D3E81EED",
+        //     // To: 'vikassaraymeer1999@gmail.com',
+        //     // From: document.getElementById("email").value,
+        //     // Subject: "Hii this is new mail",
+        //     // Body: "mail from fortfolio wesite"
+        // }).then(
+        //     message => alert("message")
+        // );
+        // console.log("vikas!!!!!!!!!!!!!!!11");
+        // fs.readFile('test.text', 'utf8', (err, data) => {
+        //     if (err) {
+        //         console.error(err);
+        //         return;
+        //     }
+        //     console.log(data);
+        // });
+        // const content = "something spaisial";
+        // fs.appendFile('test.text', content, err => {
+        //     if (err) {
+        //         console.err;
+        //         return;
+        //     }
+        // });
+
+        // }
+        let obj = [];
+        const addData = (ev) => {
+            ev.preventDefault();
+            let data = {
+                id: Date.now(),
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            }
+            obj.push(data);
+            document.forms[0].reset();
+            console.warn('added', obj);
+            var dta = JSON.stringify(data);
+            fs.writeFile('vikas.json', data, finished);
+            console.log(obj);
+            function finished(err) {
+                console.log('all set.');
+            }
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('btn').addEventListener('click', addData);
+        });

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+
+        }
+
+        body {
+            min-width: 100vw;
+            min-height: 100vh;
+            background-color: rgba(200, 38, 38, 0.422);
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+
+        }
+
+        #grid1 {
+            display: grid;
+            border: 5px solid crimson;
+            width: 80vw;
+            height: 80vh;
+            grid-template-columns: repeat(17, 1fr);
+            grid-template-rows: repeat(17, 1fr);
+            grid-gap: 5px;
+            box-sizing: border-box;
+            background-color: #8cffa0;
+            padding: 10px;
+
+        }
+
+        .child {
+            background-color: #8ca0ff;
+            /* padding: 5px; */
+        }
+
+        .coler,
+        .color1 {
+            background-color: rgb(48, 210, 48);
+            font-weight: 500;
+            color: aqua;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid green;
+            border-radius: 5px;
+        }
+
+        .coler1 {
+            background-color: rgb(226, 64, 191);
+            color: aqua;
+            border: 2px solid crimson;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 5px;
+        }
+
+        .color2 {
+            border: 2px solid rgb(187, 172, 5);
+            background-color: yellow;
+            color: red;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+
+        }
+
+        #dfs,
+        #bfs,
+        #btn1 {
+            border-radius: 5px;
+            padding: 10px;
+            width: 60px;
+            margin: 20px 20px;
+            background-color: aqua;
+            font-weight: 1000;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            border: 3px solid red;
+            cursor: pointer;
+        }
+
+        #dfs {
+            border: 3px solid rgb(7, 118, 37);
+        }
+
+        .nav span {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h2 {
+            font-weight: 800;
+            font-size: 2rem;
+            margin-bottom: 15px;
+            font-family: Arial, Helvetica, sans-serif;
+            color: rgb(142, 8, 8);
+            text-shadow: 1px 1px white;
+        }
+
+        .nav span h3 {
+            font-weight: 800;
+            font-family: Arial, Helvetica, sans-serif;
+            color: rgb(3, 0, 0);
+            text-shadow: 1px 1px white;
+
+        }
+
+        .nav span input {
+            outline: none;
+            border: 2px solid red;
+            width: 30px;
+            border-radius: 3px;
+            padding: 10px;
+            margin: 10px 20px;
+            color: black;
+            font-weight: 600;
+            text-shadow: 1px 1px 1px white;
+        }
+
+        @media screen and (max-width: 699px) {
+            .nav {
+                flex-direction: column;
+            }
+
+            #grid1 {
+                display: grid;
+                border: 3px solid crimson;
+                width: 90vw;
+                height: 80vw;
+                grid-template-columns: repeat(17, 1fr);
+                grid-template-rows: repeat(17, 1fr);
+                grid-gap: 5px;
+                box-sizing: border-box;
+                background-color: #8cffa0;
+                padding: 5px;
+
+            }
+
+            .coler,
+            .color1 {
+                background-color: rgb(116, 238, 116);
+                /* font-weight: 500; */
+                font-size: .5em;
+                color: rgb(0, 110, 255);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: none;
+                border-radius: 5px;
+            }
+
+            .nav {
+                width: 50vw;
+            }
+
+            .nav span {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .nav span h3 {
+                font-weight: 600;
+                font-size: 1.5em;
+                font-family: Arial, Helvetica, sans-serif;
+                color: rgb(3, 0, 0);
+                text-shadow: 1px 1px white;
+                margin: 10px;
+
+            }
+
+            .nav span input {
+                outline: none;
+                border: 2px solid red;
+                width: 15px;
+                border-radius: 3px;
+                padding: 10px;
+                margin: 10px 10px;
+                color: black;
+                font-weight: 300;
+                text-shadow: 1px 1px 1px white;
+            }
+
+            .coler1 {
+                background-color: rgb(226, 64, 191);
+                color: aqua;
+                border: none;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: .5em;
+                font-size: 300;
+                /* border-radius: 5px; */
+            }
+
+            .color2 {
+                border: none;
+                background-color: yellow;
+                color: red;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h2>algorithm visualizer</h2>
+    <div class="nav">
+        <span>
+            <h3>enter starting position</h3> <input type="text" id="x"> <input type="text" id="y" required>
+            <h3>enter key</h3><input type="text" id="z">
+        </span>
+        <span>
+            <input type="submit" value="DFS" id="dfs" onclick="dfs()">
+            <input type="submit" value="BFS" id="bfs" onclick="bfs()">
+            <input type="submit" value="CLEAR" id="btn1" onclick="clear1()">
+        </span>
+    </div>
+    <div id="grid1">
+    </div>
+    <script>
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        // Javascript program of the above approach
+        var ROW = 17;
+        var COL = 17;
+        let grid1 = document.getElementById("grid1");
+        // Initialize direction vectors
+        var dRow = [0, 1, 0, -1];
+        var dCol = [-1, 0, 1, 0];
+
+        // Function to check if mat[row][col]
+        // is unvisited and lies within the
+        // boundary of the given matrix
+        function isValid(vis, row, col) {
+            // If cell is out of bounds
+            if (row < 0 || col < 0
+                || row >= ROW || col >= COL)
+                return false;
+
+            // If the cell is already visited
+            if (vis[row][col])
+                return false;
+
+            // Otherwise, it can be visited
+            return true;
+        }
+
+        // Function to perform DFS
+        // Traversal on the matrix grid[]
+        async function DFS(row, col, grid, vis, key) {
+            // Initialize a stack of pairs and
+            // push the starting cell into it
+            var st = [];
+            st.push([row, col]);
+
+            // Iterate until the
+            // stack is not empty
+            while (st.length != 0) {
+                // Pop the top pair
+                var curr = st[st.length - 1];
+                st.pop();
+                var row = curr[0];
+                var col = curr[1];
+
+                // Check if the current popped
+                // cell is a valid cell or not
+                if (!isValid(vis, row, col))
+                    continue;
+
+                // Mark the current
+                // cell as visited
+                vis[row][col] = true;
+
+                // Print the element at
+                // the current top cell
+                // document.write(grid[row][col] + " ");
+                var node = document.createElement("div");
+                node.style.gridRowStart = row + 1;
+                node.style.gridColumnStart = col + 1;
+                node.classList.add('coler1');
+                if (grid[row][col] == key)
+                    node.classList.add('color2');
+                node.innerHTML = `${grid[row][col]}`
+                grid1.appendChild(node);
+                await sleep(10);
+                // Push all the adjacent cells
+                for (var i = 0; i < 4; i++) {
+                    var adjx = row + dRow[i];
+                    var adjy = col + dCol[i];
+                    st.push([adjx, adjy]);
+                }
+            }
+        }
+
+
+        // BFS implimentation
+
+
+        async function BFS(grid, vis, row, col, key) {
+            // Stores indices of the matrix cells
+            console.log("bfs called");
+            var q = [];
+
+            // Mark the starting cell as visited
+            // and push it into the queue
+            q.push([row, col]);
+            vis[row][col] = true;
+
+            // Iterate while the queue
+            // is not empty
+            while (q.length != 0) {
+
+                var cell = q[0];
+                var x = cell[0];
+                var y = cell[1];
+
+                // document.write(grid[x][y] + " ");
+                var node = document.createElement("div");
+                node.style.gridRowStart = x + 1;
+                node.style.gridColumnStart = y + 1;
+                node.classList.add('coler1');
+                if (grid[x][y] == key)
+                    node.classList.add('color2');
+                node.innerHTML = `${grid[x][y]}`
+                grid1.appendChild(node);
+                await sleep(10);
+                q.shift();
+
+                // Go to the adjacent cells
+                for (var i = 0; i < 4; i++) {
+
+                    var adjx = x + dRow[i];
+                    var adjy = y + dCol[i];
+
+                    if (isValid(vis, adjx, adjy)) {
+                        q.push([adjx, adjy]);
+                        vis[adjx][adjy] = true;
+                    }
+                }
+            }
+        }
+
+        // Driver Code
+        var grid = [[1, 2, 3, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+        [1, 2, 3, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+        [1, 2, 3, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+        [1, 2, 3, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+        [1, 2, 3, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+        [1, 2, 3, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+        [1, 2, 3, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+        [1, 2, 3, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+        [1, 2, 3, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+        [1, 2, 3, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+        [1, 2, 3, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+        [1, 2, 3, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+        [1, 2, 3, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+        [1, 2, 3, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+        [1, 2, 3, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+        [1, 2, 3, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+        [1, 2, 3, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+        ];
+        // Stores whether the current
+        // cell is visited or not
+        var vis = Array.from(Array(ROW), () => Array(COL).fill(false));
+        // Function call
+
+        function print() {
+            for (var i = 0; i <= 16; i++) {
+                for (var j = 0; j <= 16; j++) {
+                    var node = document.createElement("div");
+                    node.style.gridRowStart = i + 1;
+                    node.style.gridColumnStart = j + 1;
+                    node.classList.add('coler');
+                    grid[i][j] = Math.ceil(Math.random() * 100);
+                    node.innerHTML = `${grid[i][j]}`
+                    // document.write(grid[i][j]);
+                    grid1.appendChild(node);
+                }
+            }
+        }
+        print();
+        function clear1() {
+            console.log("clear");
+            vis = Array.from(Array(ROW), () => Array(COL).fill(false));
+            print();
+
+        }
+        function dfs() {
+            let x = parseInt(document.getElementById('x').value);
+            let y = parseInt(document.getElementById('y').value);
+            let key = parseInt(document.getElementById('z').value);
+            if (isNaN(x) || x >= 17 || y >= 17) {
+                x = 0;
+                y = 0;
+                alert("please enter valid starting point !!! , it must be less than (18,18)");
+                return;
+            }
+            if (isNaN(key) || key > 100) {
+                alert("please enter a valid key to search !!! , it must be less than 100");
+                return;
+            }
+            DFS(x, y, grid, vis, key);
+        }
+        function bfs() {
+            let x = parseInt(document.getElementById('x').value);
+            let y = parseInt(document.getElementById('y').value);
+            let key = parseInt(document.getElementById('z').value);
+            if (isNaN(x) || x >= 17 || y >= 17) {
+                x = 0;
+                y = 0;
+                alert("please enter valid starting point !!! , it must be less than (18,18)");
+                return;
+            }
+            if (isNaN(key) || key > 100) {
+                alert("please enter a valid key to search !!! , it must be less than 100");
+                return;
+            }
+            BFS(grid, vis, x, y, key);
+        }
+    </script>
+
+</body>
+
+</html>

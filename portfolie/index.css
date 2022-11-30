@@ -342,6 +342,7 @@ section .title::after{
 }
 .services .serv-content .card:hover .box{
     transform: scale(1.05);
+  
 }
 .services .serv-content .card i{
     font-size: 50px;
@@ -351,6 +352,9 @@ section .title::after{
 .services .serv-content  .card:hover i{
     color:#fff
 }
+/* .services .serv-content  .card:hover {
+  background-color: crimson;
+} */
 
 .services .serv-content .card .text{
     font-size: 25px;
@@ -363,7 +367,8 @@ section .title::after{
 
 .skills .title::before,.contact .title::before{
     background-color: #111;
-    bottom: 0px;
+    height: 2.5;
+    bottom: -5px;
 }
 .skills .title::after{
     content: "what i know";
@@ -431,6 +436,12 @@ section .title::after{
 }
 .skills-content .right .html::before{
     width: 90%;
+}
+.skills-content .right .c::before{
+    width: 90%;
+}
+.skills-content .right .react::before{
+    width: 60%;
 }
 
 .skills-content .right .css::before{
@@ -522,6 +533,137 @@ transition: all 0.3s ease;
     background-color: crimson!important;
 }
 
+
+/* project styling section start  */
+
+.project .title::after{
+    content:"what i made";
+    background-color: #111;
+}
+.project .title::before{
+    content: "";
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    width: 180px;
+    height: 2.5px;
+    background-color: #fff;
+    bottom: -5px;
+  
+    transform: translateX(-50%);
+   
+}
+.project .title{
+    color: #fff;
+}
+.project{
+    background-color: #111;
+    min-height: 90vh;
+    box-sizing: border-box;
+}
+/* .project{
+    box-sizing: border-box;
+color: #fff;
+background: #111;
+padding: 130px 0;
+} */
+.project .carousel{
+    display: flex;
+    width: 90vw;
+   position:relative;
+    left: -5vw;
+    margin:0 15px;
+    justify-self: left;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+.project .carousel .card{
+    /* width: max(30vw,500px); */
+    background:#222;
+    border-radius: 6px;
+    /* padding: 25px 35px; */
+    text-align: center;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    padding: 30px;
+    margin-top: 30px;
+   
+ 
+}
+
+.project .carousel .card:hover{
+    background:crimson;
+}
+.project .carousel .card .box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    padding: 1px;
+    
+  
+}
+.project .carousel .card .box .pname{
+    font-size: .8rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 150;
+    color: #fff;
+}
+.project .carousel .card:hover .box{
+    transform: scale(1.05);;
+}
+.project .carousel .card .text{
+    font-size: 25px;
+    font-weight: 500;
+    margin: 10px 0 7px 0;
+}
+
+
+.project .carousel .card img{
+
+width: max(20vw,300px);
+height: max(23vw,350px);
+object-fit: cover;
+border-radius: 10px;
+border:5px solid crimson;
+transition: all 0.3s ease;
+margin: 20px;
+}
+.project .carousel .card:hover img{
+    border-color:#fff;
+}
+
+ .links{
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+ .git-hub,.live-demo{
+   
+    padding: 10px;
+    border: 2px solid crimson;
+    border-radius: 6px;
+    cursor: pointer;
+    color: crimson;
+    font-weight: 600;
+    font-family: 'Ubantu',sans-serif;
+}
+.project .carousel .card:hover  .git-hub ,.project .carousel .card:hover .live-demo {
+    background: #fff;
+    color: crimson;
+}
+
+.live-demo a,.git-hub a{
+    text-decoration: none;
+    color: crimson;
+    color: crimson;
+    font-weight: 600;
+    font-family: 'Ubantu',sans-serif;
+}
 
 .contact .title::before{
     content: "";
@@ -654,8 +796,73 @@ footer span a{
 footer span a:hover{
     text-decoration: underline;
 }
+.education{
 
+box-sizing: border-box;
+color: #fff;
+background: #111;
+padding: 130px 0;
+}
+.education .edu_container{
+   
+    color: #fff;
+    box-sizing: border-box;
+    margin: auto;
+    width:100%;
+    padding: 0 23px;
+}
+.edu_heading{
+    font-family: 'Ubantu',sans-serif;
+    color: #fff;
+    box-sizing: border-box;
+    position: relative;
+    text-align: center;
+    font-size: 40px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+.education .edu_container .edu_content{
 
+    color: #fff;
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    /* background-color: red; */
+}
+.education .edu_container .edu_content .card{
+  
+    color: #fff;
+    box-sizing: border-box;
+    /* height: 450px; */
+  
+    background: #222;
+    text-align: center;
+    border-radius: 6px;
+    padding: 40px 25px;
+    cursor: pointer;
+    margin-right: 15px;
+    margin-left: 15px;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+    width: 350px;
+}
+.education .edu_container .edu_content .card:hover{
+    background-color: crimson;
+}
+.education .edu_container .edu_content .card .box{
+    font-family: 'Ubantu',sans-serif;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    padding-bottom: 100px;
+}
+/* .education .edu_container .edu_content .card .box  */
   @media (max-width:1104px) {
     .about .about-content .left img{
         height: 350px;

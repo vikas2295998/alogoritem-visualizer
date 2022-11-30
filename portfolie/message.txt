@@ -1,0 +1,17 @@
+[
+  {
+    "name": "vishal",
+    "class": "tenth",
+    "subject": "physics"
+  },
+  {
+    "name": "vishal",
+    "class": "tenth",
+    "subject": "physics"
+  },
+  {
+    "name": "vishal",
+    "class": "tenth",
+    "subject": "physics"
+  }
+]
